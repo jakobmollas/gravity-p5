@@ -1,7 +1,5 @@
-# P5 Flowart
-
-Simple random generative art generator based on particles in perlin noise flow fields.
+# P5 Gravity
 
 Implemented using [P5](https://p5js.org) (Processing for .js).
 
-Live example at: https://jakobmollas.github.io/flowart-p5/
+Live example at: https://jakobmollas.github.io/gravity-p5/
