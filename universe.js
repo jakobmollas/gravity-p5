@@ -35,11 +35,11 @@ class Universe {
     }
 
     drawParticles() {
-        for (let particle of this.particles) {
-            strokeWeight(settings.pointSize);
-            stroke(255, settings.alpha);
+        strokeWeight(settings.pointSize);
+        stroke(255, settings.alpha);
+
+        for (let particle of this.particles)
             point(particle.x, particle.y);
-        }
     }
 
     affect(particle) {
