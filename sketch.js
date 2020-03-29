@@ -7,20 +7,16 @@ class Settings {
     this.showDiagnostics = false;
     this.showBlackHoles = false;
 
-    this.particleCount = 3000;
+    this.particleCount = 5000;
     this.blackHoleCount = 4;
     this.pointSize = 1.0;
-    this.minGravity = 10000;
+    this.minGravity = 50000;
     this.maxGravity = 100000;
-    this.alpha = 3.0;
+    this.alpha = 12;
   }
 
   randomize() {
     this.blackHoleCount = floor(random(2, 8));
-    this.pointSize = 1;
-    this.minGravity = random(500, 1500);
-    this.maxGravity = settings.minGravity + random(50000, 150000);
-    this.alpha = random(5, 15);
   }
 }
 
@@ -53,7 +49,7 @@ function createGuiControls() {
   f1.add(settings, 'blackHoleCount', 1, 10).step(1).listen().onFinishChange(n => restart());
   f1.add(settings, 'particleCount', 1, 5000).step(1).listen().onFinishChange(n => restart());
   f1.add(settings, 'pointSize', 1, 10).step(1).listen();
-  f1.add(settings, 'minGravity', 0, 20000).listen();
+  f1.add(settings, 'minGravity', 0, 100000).listen();
   f1.add(settings, 'maxGravity', 0, 300000).listen();
   f1.add(settings, 'alpha', 1, 255).listen();
   f1.open();
@@ -124,7 +120,7 @@ function drawDiagnostics() {
 
   let fps = frameRate();
   text("FPS:   " + fps.toFixed(), 10, 20);
-  text("Count: " + particles.length.toFixed(), 10, 40);
+  text("Count: " + settings.particleCount.toFixed(), 10, 40);
 
   pop();
 }
