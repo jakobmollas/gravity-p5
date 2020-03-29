@@ -5,10 +5,10 @@ class Settings {
     // General
     this.animate = true;
     this.showDiagnostics = false;
-    this.showBlackHoles = false;
+    this.showAttractors = false;
 
     this.particleCount = 4000;
-    this.blackHoleCount = 4;
+    this.attractorCount = 4;
     this.pointSize = 1.0;
     this.minGravity = 1000;
     this.maxGravity = 50000;
@@ -16,7 +16,7 @@ class Settings {
   }
 
   randomize() {
-    this.blackHoleCount = floor(random(3, 8));
+    this.attractorCount = floor(random(3, 8));
   }
 }
 
@@ -43,10 +43,10 @@ function createGuiControls() {
 
   gui.add(settings, 'animate');
   gui.add(settings, 'showDiagnostics');
-  gui.add(settings, 'showBlackHoles');
+  gui.add(settings, 'showAttractors');
 
   let f1 = gui.addFolder('Particles');
-  f1.add(settings, 'blackHoleCount', 1, 10).step(1).listen().onFinishChange(n => restart());
+  f1.add(settings, 'attractorCount', 1, 10).step(1).listen().onFinishChange(n => restart());
   f1.add(settings, 'particleCount', 1, 5000).step(1).listen().onFinishChange(n => restart());
   f1.add(settings, 'pointSize', 1, 10).step(1).listen();
   f1.add(settings, 'minGravity', 0, 100000).listen();

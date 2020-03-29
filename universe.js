@@ -2,11 +2,11 @@
 
 class Universe {
     constructor() {
-        this.blackholes = [];
+        this.attractors = [];
         this.particles = [];
 
-        for (var i = 0; i < settings.blackHoleCount; i++)
-            this.blackholes[i] = new BlackHole();
+        for (var i = 0; i < settings.attractorCount; i++)
+            this.attractors[i] = new Attractor();
 
         for (var i = 0; i < settings.particleCount; i++)
             this.particles[i] = createVector(random(windowWidth), random(windowHeight));
@@ -21,10 +21,9 @@ class Universe {
         if (settings.animate)
             this.drawParticles();
 
-        if (settings.showBlackHoles) {
-            for (let hole of this.blackholes) {
-                hole.draw();
-            }
+        if (settings.showAttractors) {
+            for (let attractor of this.attractors)
+                attractor.draw();
         }
     }
 
@@ -44,11 +43,11 @@ class Universe {
     affect(particle) {
         let nextPosition = particle.copy();
 
-        for (let hole of this.blackholes) {
-            let pull = p5.Vector.sub(hole.position, particle);
+        for (let attractor of this.attractors) {
+            let pull = p5.Vector.sub(attractor.position, particle);
             let squareDistance = pull.magSq(pull);
-            let holeInfluence = pull.mult(hole.force).div(squareDistance);
-            nextPosition.add(holeInfluence);
+            let influence = pull.mult(attractor.force).div(squareDistance);
+            nextPosition.add(influence);
         }
 
         particle.set(nextPosition);
