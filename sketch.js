@@ -30,7 +30,6 @@ class Settings {
 
 let gui = null;
 let settings = new Settings();
-let particles = [];
 let universe;
 
 function setup() {
@@ -80,15 +79,7 @@ function createNewRandomWorld() {
 
 function restart() {
   universe = new Universe(settings.blackHoleCount);
-  initializeParticles();
   background(15, 10, 10);
-}
-
-function initializeParticles() {
-  particles = [];
-
-  for (var i = 0; i < settings.particleCount; i++)
-    particles[i] = new Particle();
 }
 
 function keyTyped() {
@@ -117,24 +108,12 @@ function deviceShaken() {
 
 // Main update loop
 function draw() {
-  if (settings.showDiagnostics)
+  if (settings.showDiagnostics) {
     drawDiagnostics();
-
-  if (settings.animate) {
-    updateParticles();
   }
 
-  if (settings.showBlackHoles) {
-    universe.draw();
-  }
-}
-
-function updateParticles() {
-  for (let particle of particles) {
-    particle.draw();
-    universe.apply(particle);
-    particle.update();
-  }
+  universe.update();
+  universe.draw();
 }
 
 function drawDiagnostics() {
