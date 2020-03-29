@@ -6,7 +6,7 @@ class Settings {
     this.animate = true;
     this.showDiagnostics = false;
     this.showBlackHoles = false;
-    
+
     this.particleCount = 3000;
     this.blackHoleCount = 4;
     this.pointSize = 1.0;
@@ -48,11 +48,11 @@ function windowResized() {
 
 function createGuiControls() {
   gui = new dat.GUI();
-  
+
   gui.add(settings, 'animate');
   gui.add(settings, 'showDiagnostics');
   gui.add(settings, 'showBlackHoles');
-  
+
   let f1 = gui.addFolder('Particles');
   f1.add(settings, 'blackHoleCount', 1, 10).step(1).listen().onFinishChange(n => restart());
   f1.add(settings, 'particleCount', 1, 5000).step(1).listen().onFinishChange(n => restart());
@@ -63,7 +63,7 @@ function createGuiControls() {
   f1.add(settings, 'alpha', 1, 255).listen();
   f1.add(settings, 'staticColor', 0, 255).listen();
   f1.open();
-  
+
   gui.close();
 }
 
@@ -92,9 +92,9 @@ function keyTyped() {
       settings.showDiagnostics = !settings.showDiagnostics;
       break;
 
-      case " ":
-        createNewRandomWorld();
-        break;
+    case " ":
+      createNewRandomWorld();
+      break;
 
     default:
       // Prevent default behavior

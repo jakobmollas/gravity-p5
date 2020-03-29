@@ -4,52 +4,43 @@ class Universe {
     constructor(count) {
         this.blackholes = [];
         this.particles = [];
-        
+
         for (var i = 0; i < count; i++)
             this.blackholes[i] = new BlackHole();
 
-        this.initializeParticles();
+        for (var i = 0; i < settings.particleCount; i++)
+            this.particles[i] = new Particle();
     }
 
-    initializeParticles() {
-        this.particles = [];
-      
-        for (var i = 0; i < settings.particleCount; i++)
-          this.particles[i] = new Particle();
-      }
-
     update() {
-        if (settings.animate) {
+        if (settings.animate)
             this.updateParticles();
-          }
     }
 
     draw() {
-        if (settings.animate) {
+        if (settings.animate)
             this.drawParticles();
-          }
-        
-          if (settings.showBlackHoles) {
+
+        if (settings.showBlackHoles) {
             for (let hole of this.blackholes) {
                 hole.draw();
             }
-          }
+        }
     }
 
     updateParticles() {
         for (let particle of this.particles) {
-          universe.affect(particle);
-          particle.update();
+            universe.affect(particle);
+            particle.update();
         }
-      }
+    }
 
-      drawParticles() {
-        for (let particle of this.particles) {
-          particle.draw();
-        }
-      }
+    drawParticles() {
+        for (let particle of this.particles)
+            particle.draw();
+    }
 
-      affect(particle) {
+    affect(particle) {
         let nextPosition = createVector(particle.position.x, particle.position.y);
 
         for (let hole of this.blackholes) {
@@ -58,7 +49,7 @@ class Universe {
             let holeInfluence = pull.mult(hole.force).div(squareDistance);
             nextPosition.add(holeInfluence);
         }
-        
+
         particle.position = nextPosition;
     }
 }
