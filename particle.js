@@ -7,14 +7,13 @@ class Particle {
 
     initialize() {
         this.position = createVector(random(windowWidth), random(windowHeight));
-        this.maxLife = settings.iterations;
-        this.life = 25;
+        this.life = settings.iterations;
     }
 
     draw() {
         strokeWeight(settings.pointSize);
         colorMode(RGB);
-        stroke(255, 255, 255, settings.alpha);
+        stroke(settings.staticColor, settings.alpha);
         point(this.position.x, this.position.y);
     }
 

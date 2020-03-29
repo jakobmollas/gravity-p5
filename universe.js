@@ -30,6 +30,10 @@ class Universe {
         particle.position.x = mx;
         particle.position.y = my;
     }
+
+    draw() {
+        
+    }
 }
 
 class BlackHole {
