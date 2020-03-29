@@ -7,7 +7,8 @@ class Settings {
     this.showDiagnostics = false;
     this.showBlackHoles = false;
     
-    this.count = 3000;
+    this.particleCount = 3000;
+    this.blackHoleCount = 4;
     this.pointSize = 1.0;
     this.minGravity = 10000;
     this.maxGravity = 100000;
@@ -17,6 +18,7 @@ class Settings {
   }
 
   randomize() {
+    this.blackHoleCount = floor(random(1, 6));
     this.pointSize = 1;
     this.minGravity = random(5000, 15000);
     this.maxGravity = settings.minGravity + random(50000, 150000);
@@ -40,9 +42,9 @@ function setup() {
   createNewRandomWorld();
 }
 
-function initCanvas() {
-  let canvas = createCanvas(windowWidth, windowHeight);
-  canvas.style('display', 'block');
+function windowResized() {
+  initCanvas();
+  restart();
 }
 
 function createGuiControls() {
@@ -53,7 +55,8 @@ function createGuiControls() {
   gui.add(settings, 'showBlackHoles');
   
   let f1 = gui.addFolder('Particles');
-  f1.add(settings, 'count', 1, 5000).step(1).onFinishChange(n => init());
+  f1.add(settings, 'blackHoleCount', 1, 10).step(1).listen().onFinishChange(n => restart());
+  f1.add(settings, 'particleCount', 1, 5000).step(1).listen().onFinishChange(n => restart());
   f1.add(settings, 'pointSize', 1, 10).step(1).listen();
   f1.add(settings, 'minGravity', 0, 20000).listen();
   f1.add(settings, 'maxGravity', 0, 300000).listen();
@@ -65,18 +68,18 @@ function createGuiControls() {
   gui.close();
 }
 
-function windowResized() {
-  initCanvas();
-  restart();
+function initCanvas() {
+  let canvas = createCanvas(windowWidth, windowHeight);
+  canvas.style('display', 'block');
 }
 
 function createNewRandomWorld() {
   settings.randomize();
-  universe = new Universe(4);
   restart();
 }
 
 function restart() {
+  universe = new Universe(settings.blackHoleCount);
   initializeParticles();
   background(15, 10, 10);
 }
@@ -84,7 +87,7 @@ function restart() {
 function initializeParticles() {
   particles = [];
 
-  for (var i = 0; i < settings.count; i++)
+  for (var i = 0; i < settings.particleCount; i++)
     particles[i] = new Particle();
 }
 
