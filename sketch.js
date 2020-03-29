@@ -12,7 +12,7 @@ class Settings {
     this.pointSize = 1.0;
     this.minGravity = 1000;
     this.maxGravity = 50000;
-    this.alpha = 10;
+    this.alpha = 8;
   }
 
   randomize() {
