@@ -1,15 +1,15 @@
 'use strict'
 
 class Universe {
-    constructor(count) {
+    constructor() {
         this.blackholes = [];
         this.particles = [];
 
-        for (var i = 0; i < count; i++)
+        for (var i = 0; i < settings.blackHoleCount; i++)
             this.blackholes[i] = new BlackHole();
 
         for (var i = 0; i < settings.particleCount; i++)
-            this.particles[i] = new Particle();
+            this.particles[i] = createVector(random(windowWidth), random(windowHeight));
     }
 
     update() {
@@ -31,25 +31,27 @@ class Universe {
     updateParticles() {
         for (let particle of this.particles) {
             universe.affect(particle);
-            particle.update();
         }
     }
 
     drawParticles() {
-        for (let particle of this.particles)
-            particle.draw();
+        for (let particle of this.particles) {
+            strokeWeight(settings.pointSize);
+            stroke(255, settings.alpha);
+            point(particle.x, particle.y);
+        }
     }
 
     affect(particle) {
-        let nextPosition = createVector(particle.position.x, particle.position.y);
+        let nextPosition = particle.copy();
 
         for (let hole of this.blackholes) {
-            let pull = p5.Vector.sub(hole.position, particle.position);
+            let pull = p5.Vector.sub(hole.position, particle);
             let squareDistance = pull.magSq(pull);
             let holeInfluence = pull.mult(hole.force).div(squareDistance);
             nextPosition.add(holeInfluence);
         }
 
-        particle.position = nextPosition;
+        particle.set(nextPosition);
     }
 }

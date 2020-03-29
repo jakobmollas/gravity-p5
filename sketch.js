@@ -12,19 +12,15 @@ class Settings {
     this.pointSize = 1.0;
     this.minGravity = 10000;
     this.maxGravity = 100000;
-    this.iterations = 20;
     this.alpha = 3.0;
-    this.staticColor = 0;
   }
 
   randomize() {
-    this.blackHoleCount = floor(random(2, 6));
+    this.blackHoleCount = floor(random(2, 8));
     this.pointSize = 1;
-    this.minGravity = random(5000, 15000);
+    this.minGravity = random(500, 1500);
     this.maxGravity = settings.minGravity + random(50000, 150000);
-    this.iterations = random(5, 30);
-    this.alpha = random(4, 13);
-    this.staticColor = 255;
+    this.alpha = random(5, 15);
   }
 }
 
@@ -59,9 +55,7 @@ function createGuiControls() {
   f1.add(settings, 'pointSize', 1, 10).step(1).listen();
   f1.add(settings, 'minGravity', 0, 20000).listen();
   f1.add(settings, 'maxGravity', 0, 300000).listen();
-  f1.add(settings, 'iterations', 0, 50).listen();
   f1.add(settings, 'alpha', 1, 255).listen();
-  f1.add(settings, 'staticColor', 0, 255).listen();
   f1.open();
 
   gui.close();
@@ -78,7 +72,7 @@ function createNewRandomWorld() {
 }
 
 function restart() {
-  universe = new Universe(settings.blackHoleCount);
+  universe = new Universe();
   background(15, 10, 10);
 }
 
