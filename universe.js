@@ -29,9 +29,8 @@ class Universe {
     }
 
     updateParticles() {
-        for (let particle of this.particles) {
+        for (let particle of this.particles)
             universe.affect(particle);
-        }
     }
 
     drawParticles() {
