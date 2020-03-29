@@ -3,7 +3,7 @@
 class Universe {
     constructor(count) {
         this.blackholes = [];
-        let particles = [];
+        this.particles = [];
         
         for (var i = 0; i < count; i++)
             this.blackholes[i] = new BlackHole();

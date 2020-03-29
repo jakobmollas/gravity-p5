@@ -18,7 +18,7 @@ class Settings {
   }
 
   randomize() {
-    this.blackHoleCount = floor(random(1, 6));
+    this.blackHoleCount = floor(random(2, 6));
     this.pointSize = 1;
     this.minGravity = random(5000, 15000);
     this.maxGravity = settings.minGravity + random(50000, 150000);
