@@ -7,16 +7,16 @@ class Settings {
     this.showDiagnostics = false;
     this.showBlackHoles = false;
 
-    this.particleCount = 5000;
+    this.particleCount = 4000;
     this.blackHoleCount = 4;
     this.pointSize = 1.0;
-    this.minGravity = 50000;
-    this.maxGravity = 100000;
-    this.alpha = 12;
+    this.minGravity = 1000;
+    this.maxGravity = 50000;
+    this.alpha = 10;
   }
 
   randomize() {
-    this.blackHoleCount = floor(random(2, 8));
+    this.blackHoleCount = floor(random(3, 8));
   }
 }
 
