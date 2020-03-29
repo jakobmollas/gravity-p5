@@ -11,6 +11,9 @@ class Universe {
     apply(particle) {
         let mx = particle.position.x;
         let my = particle.position.y;
+
+        for (let hole of this.blackholes) {
+        }
         
         for (let i = 0; i < this.blackholes.length; i++) {
             let dx = this.blackholes[i].position.x - particle.position.x;
@@ -32,13 +35,25 @@ class Universe {
     }
 
     draw() {
-        
+        for (let hole of this.blackholes) {
+            hole.draw();
+        }
     }
 }
 
 class BlackHole {
     constructor() {
-        this.force = random(10000, 100000);
+        this.force = random(settings.minGravity, settings.maxGravity);
         this.position = createVector(random(windowWidth), random(windowHeight));
+    }
+
+    draw() {
+        push();
+        strokeWeight(1);
+        colorMode(RGB);
+        noFill();
+        stroke(255, 50, 50, 255);
+        ellipse(this.position.x, this.position.y, map(this.force, settings.minGravity, settings.maxGravity, 0, 50));
+        pop();
     }
 }

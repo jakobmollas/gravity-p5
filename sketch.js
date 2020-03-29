@@ -5,6 +5,7 @@ class Settings {
     // General
     this.animate = true;
     this.showDiagnostics = false;
+    this.showBlackHoles = false;
     
     this.count = 3000;
     this.pointSize = 1.0;
@@ -20,8 +21,8 @@ class Settings {
     this.minGravity = random(5000, 15000);
     this.maxGravity = settings.minGravity + random(50000, 150000);
     this.iterations = random(5, 30);
-    this.alpha = random(3, 8);
-    this.staticColor = random(0, 255);
+    this.alpha = random(4, 13);
+    this.staticColor = 255;
   }
 }
 
@@ -49,6 +50,7 @@ function createGuiControls() {
   
   gui.add(settings, 'animate');
   gui.add(settings, 'showDiagnostics');
+  gui.add(settings, 'showBlackHoles');
   
   let f1 = gui.addFolder('Particles');
   f1.add(settings, 'count', 1, 5000).step(1).onFinishChange(n => init());
@@ -117,6 +119,10 @@ function draw() {
 
   if (settings.animate) {
     updateParticles();
+  }
+
+  if (settings.showBlackHoles) {
+    universe.draw();
   }
 }
 
