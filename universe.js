@@ -28,19 +28,16 @@ class Universe {
     }
 
     updateParticles() {
-        strokeWeight(settings.pointSize);
-        stroke(255, settings.alpha);
-        
         for (let particle of this.particles)
             universe.affect(particle);
     }
 
     drawParticles() {
-        //strokeWeight(settings.pointSize);
-        //stroke(255, settings.alpha);
+        strokeWeight(settings.pointSize);
+        stroke(255, settings.alpha);
 
-        //for (let particle of this.particles)
-            //point(particle.x, particle.y);
+        for (let particle of this.particles)
+            point(particle.x, particle.y);
     }
 
     affect(particle) {
@@ -51,7 +48,6 @@ class Universe {
             let squareDistance = pull.magSq(pull);
             let influence = pull.mult(attractor.force).div(squareDistance);
             nextPosition.add(influence);
-            point(nextPosition.x, nextPosition.y);
         }
 
         particle.set(nextPosition);
